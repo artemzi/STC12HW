@@ -1,7 +1,5 @@
 package com.github.artemzi.hw07;
 
-import com.github.artemzi.hw07.annotations.AddLogging;
-
 import java.lang.reflect.Proxy;
 import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;

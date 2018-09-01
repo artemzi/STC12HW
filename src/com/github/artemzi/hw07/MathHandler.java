@@ -1,6 +1,7 @@
 package com.github.artemzi.hw07;
 
-import com.github.artemzi.hw07.annotations.AddLogging;
+import com.github.artemzi.hw07.annotations.ClearData;
+import com.github.artemzi.hw07.annotations.Logged;
 
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
@@ -16,9 +17,14 @@ public class MathHandler implements InvocationHandler {
 
     @Override
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
-        if (box.getClass().getAnnotation(AddLogging.class) != null) {
+        if (box.getClass().getAnnotation(Logged.class) != null) {
             LOGGER.info("Annotation is working for method: "+ method.getName());
         }
+
+        if (box.getClass().getAnnotation(ClearData.class) != null) {
+        }
+
+
         return method.invoke(box, args);
     }
 }

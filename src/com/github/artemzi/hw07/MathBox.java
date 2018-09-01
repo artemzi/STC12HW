@@ -1,6 +1,6 @@
 package com.github.artemzi.hw07;
 
-import com.github.artemzi.hw07.annotations.AddLogging;
+import com.github.artemzi.hw07.annotations.Logged;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -8,7 +8,7 @@ import java.util.stream.Collectors;
 /**
  * Copy of MathBox class from third task
  */
-@AddLogging
+@Logged
 class MathBox implements Box {
 
     private NavigableSet<Integer> storage = new TreeSet<>();
