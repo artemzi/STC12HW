@@ -5,9 +5,8 @@ import java.util.List;
 /**
  * Interface will be used in proxy
  */
-public interface Box<T> {
+public interface Box {
     int summator();
     List<Double> splitter(int divider);
     boolean removeElementIfExists(Integer digit);
-
 }

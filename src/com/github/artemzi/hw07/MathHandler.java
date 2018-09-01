@@ -4,9 +4,9 @@ import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 
 public class MathHandler implements InvocationHandler {
-    private Box<Integer> box;
+    private Box box;
 
-    public MathHandler(Box<Integer> box) {
+    public MathHandler(MathBox box) {
         this.box = box;
     }
 
