@@ -30,7 +30,7 @@ public class MathHandler implements InvocationHandler {
                     if (!storage.isAccessible()) {
                         storage.setAccessible(true);
                     }
-                    
+                    // TODO how to access and clear non primitive type?
 
                     LOGGER.info("ClearData called from proxy for " + method.getName());
                 } catch (NoSuchFieldException |

@@ -27,8 +27,7 @@ public class Main {
                 MathBox.class.getInterfaces(),
                 handler);
 
-        // If ClearData annotation works, we cannot get sum of empty collection
-        System.out.println(box.summator());
+        box.summator();
         box.splitter(123);
         Random random = new Random();
         box.removeElementIfExists(data[random.nextInt(100)]);
