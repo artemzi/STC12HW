@@ -31,8 +31,7 @@ public class MathHandler implements InvocationHandler {
                     if (!storage.isAccessible()) {
                         storage.setAccessible(true);
                     }
-                    // TODO: this doesn't work. fix it
-                    storage.set(box.getClass(), new TreeSet<Integer>());
+                    storage.set(box, new TreeSet<Integer>()); // field is empty now
 
                     LOGGER.info("ClearData called from proxy for " + method.getName());
                 } catch (NoSuchFieldException |
