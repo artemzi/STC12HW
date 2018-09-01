@@ -1,6 +1,7 @@
 package com.github.artemzi.hw07;
 
-import com.github.artemzi.hw07.annotations.AddLogging;
+import com.github.artemzi.hw07.annotations.ClearData;
+import com.github.artemzi.hw07.annotations.Logged;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -8,7 +9,7 @@ import java.util.stream.Collectors;
 /**
  * Copy of MathBox class from third task
  */
-@AddLogging
+@Logged
 class MathBox implements Box {
 
     private NavigableSet<Integer> storage = new TreeSet<>();
@@ -17,6 +18,7 @@ class MathBox implements Box {
         this.storage.addAll(Arrays.asList(data));
     }
 
+    @ClearData
     public int summator() {
         return this.storage.stream().mapToInt(Integer::intValue).sum();
     }
@@ -35,7 +37,7 @@ class MathBox implements Box {
      * Method return true if succeed or false
      * @param  digit, object for removing
      * @return boolean
-    * */
+    */
     public boolean removeElementIfExists(Integer digit) {
         // remove, is a method from a collection and it already contains all necessary checks
         return this.storage.remove(digit);

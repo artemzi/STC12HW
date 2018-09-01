@@ -1,7 +1,5 @@
 package com.github.artemzi.hw07;
 
-import com.github.artemzi.hw07.annotations.AddLogging;
-
 import java.lang.reflect.Proxy;
 import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
@@ -25,7 +23,8 @@ public class Main {
         }
 
         MathHandler handler = new MathHandler(new MathBox(data));
-        Box box = (Box) Proxy.newProxyInstance(MathHandler.class.getClassLoader(), new Class[]{Box.class},
+        Box box = (Box) Proxy.newProxyInstance(MathHandler.class.getClassLoader(),
+                MathBox.class.getInterfaces(),
                 handler);
 
         box.summator();
