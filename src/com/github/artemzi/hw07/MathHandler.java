@@ -6,6 +6,7 @@ import com.github.artemzi.hw07.annotations.Logged;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
+import java.util.TreeSet;
 import java.util.logging.Logger;
 
 public class MathHandler implements InvocationHandler {
@@ -30,7 +31,8 @@ public class MathHandler implements InvocationHandler {
                     if (!storage.isAccessible()) {
                         storage.setAccessible(true);
                     }
-                    // TODO how to access and clear non primitive type?
+                    // TODO: this doesn't work. fix it
+                    storage.set(box.getClass(), new TreeSet<Integer>());
 
                     LOGGER.info("ClearData called from proxy for " + method.getName());
                 } catch (NoSuchFieldException |

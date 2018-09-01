@@ -23,11 +23,14 @@ public class Main {
         }
 
         MathHandler handler = new MathHandler(new MathBox(data));
+        MathBox mathBox = new MathBox(data);
+
         Box box = (Box) Proxy.newProxyInstance(MathHandler.class.getClassLoader(),
                 MathBox.class.getInterfaces(),
                 handler);
 
-        box.summator();
+        System.out.printf("[summator] from proxy: %d\n", box.summator());
+        System.out.printf("[summator] direct call: %d\n", mathBox.summator());
         box.splitter(123);
         Random random = new Random();
         box.removeElementIfExists(data[random.nextInt(100)]);
