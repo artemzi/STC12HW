@@ -1,5 +1,7 @@
 package com.github.artemzi.lab01;
 
+import com.github.artemzi.lab01.lib.WaitGroup;
+
 import java.util.Collections;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
@@ -9,10 +11,8 @@ import java.util.concurrent.ConcurrentHashMap;
  *
  * Used for storing received data.
  */
-public class Content {
+public class Content extends WaitGroup {
     private Set<Byte[]> data;
-    // Number of jobs in WaitGroup
-    private int jobs = 0;
     private Content() {
         this.data = Collections.newSetFromMap(new ConcurrentHashMap<Byte[], Boolean>());
     }
@@ -35,25 +35,6 @@ public class Content {
 
     public boolean addValue(byte[] val) {
         return this.data.add(toObjects(val));
-    }
-
-    // Increment jobs counter
-    public synchronized void add(int i) {
-        jobs += i;
-    }
-
-    // Decrement jobs counter and free resource if finished
-    public synchronized void done() {
-        if (--jobs == 0) {
-            notifyAll();
-        }
-    }
-
-    // Wait before jobs done
-    public synchronized void await() throws InterruptedException {
-        while (jobs > 0) {
-            wait();
-        }
     }
 
     // TODO: do i need it here?

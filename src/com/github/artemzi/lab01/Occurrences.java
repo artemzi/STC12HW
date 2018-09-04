@@ -13,8 +13,12 @@ public class Occurrences implements OccurrencesContact {
 
     @Override
     public void getOccurrences(String[] sources, String[] words, String res) {
-        Content.getInstance().add(sources.length); // Initialize WaitGroup with values
-        for (String source : sources) {
+        executor(sources);
+    }
+
+    private void executor(String[] resources) {
+        Content.getInstance().add(resources.length); // Initialize WaitGroup with values
+        for (String source : resources) {
             pool.execute(new ContentRequest(source));
         }
         pool.shutdown();
