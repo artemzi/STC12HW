@@ -16,5 +16,6 @@ public class Occurrences implements OccurrencesContact {
         for (String source : sources) {
             pool.execute(new ContentRequest(source));
         }
+        pool.shutdown();
     }
 }
