@@ -9,7 +9,7 @@ public interface Executor {
         try {
             interpreter.eval(code);
         } catch (EvalError e) {
-            e.printStackTrace();
+            System.err.println(e.getMessage());
         }
     }
 }
