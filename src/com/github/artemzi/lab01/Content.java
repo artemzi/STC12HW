@@ -6,10 +6,12 @@ import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * Class Content implemented as thread safe singleton.
+ *
+ * Used for storing received data.
  */
 public class Content {
     private Set<Byte[]> data;
-
+    private int jobs = 0;
     private Content() {
         this.data = Collections.newSetFromMap(new ConcurrentHashMap<Byte[], Boolean>());
     }
@@ -34,6 +36,22 @@ public class Content {
         return this.data.add(toObjects(val));
     }
 
+    public synchronized void add(int i) {
+        jobs += i;
+    }
+
+    public synchronized void done() {
+        if (--jobs == 0) {
+            notifyAll();
+        }
+    }
+
+    public synchronized void await() throws InterruptedException {
+        while (jobs > 0) {
+            wait();
+        }
+    }
+
     // TODO: do i need it here?
     private Byte[] toObjects(byte[] bytesPrim) {
         Byte[] bytes = new Byte[bytesPrim.length];
@@ -44,8 +62,8 @@ public class Content {
         return bytes;
     }
 
-    // TODO: do i need it?
-    private byte[] toPrimitives(Byte[] oBytes) {
+    // TODO: do i ever need it?
+    public byte[] toPrimitives(Byte[] oBytes) {
         byte[] bytes = new byte[oBytes.length];
 
         for(int i = 0; i < oBytes.length; i++) {

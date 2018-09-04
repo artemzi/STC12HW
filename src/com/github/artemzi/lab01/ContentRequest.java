@@ -1,7 +1,5 @@
 package com.github.artemzi.lab01;
 
-import com.github.artemzi.hw07.MathHandler;
-
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -11,7 +9,7 @@ import java.util.logging.Logger;
 
 public class ContentRequest implements Runnable {
     private String path;
-    private static final Logger LOGGER = Logger.getLogger(MathHandler.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(ContentRequest.class.getName());
 
     ContentRequest(String path) {
         this.path = path;
@@ -31,7 +29,8 @@ public class ContentRequest implements Runnable {
 
                 boolean added = Content.getInstance().addValue(byteArrayOutputStream.toByteArray());
                 if (added) { // TODO: add exception?
-                    LOGGER.info("New value was added to Content");
+                    LOGGER.info("New value was added to Content" + byteArrayOutputStream.toByteArray().hashCode());
+                    Content.getInstance().done(); // Remove one job from WaitGroup
                 } else {
                     LOGGER.warning("Can't add content");
                 }
