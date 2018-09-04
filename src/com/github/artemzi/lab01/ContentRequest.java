@@ -29,18 +29,23 @@ public class ContentRequest implements Runnable {
                     byteArrayOutputStream.write(data);
                 } while (data != -1);
 
-                System.out.println(byteArrayOutputStream.toByteArray()); // TODO
+                boolean added = Content.getInstance().addValue(byteArrayOutputStream.toByteArray());
+                if (added) { // TODO: add exception?
+                    LOGGER.info("New value was added to Content");
+                } else {
+                    LOGGER.warning("Can't add content");
+                }
             } catch (IOException e) {
                 LOGGER.info(e.getMessage());
             }
         }
-
     }
 
     private URL getUrl() {
         URL url = null;
         try {
             url = new URL(this.path);
+            LOGGER.info("URL created: " + url.toString());
         } catch (MalformedURLException e) {
             System.err.println(e.getMessage());
         }

@@ -5,8 +5,7 @@ public class Main {
         Occurrences o = new Occurrences();
         o.getOccurrences(
                 new String[]{
-                        "http://ya.ru",
-                        "http://google.com",
+                        "http://www.gutenberg.org/files/4280/4280-0.txt",
                         "file:data/lab01/test"
                 },
                 new String[]{
