@@ -24,7 +24,7 @@ public class Main {
         try {
             Content.getInstance().await();
         } catch (InterruptedException e) {
-            LOGGER.info("Cannot wait for job done");
+            LOGGER.info("Counter.await was broken.");
         }
 
         for (Byte[] data : Content.getInstance().getData()) {

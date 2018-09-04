@@ -11,6 +11,7 @@ import java.util.concurrent.ConcurrentHashMap;
  */
 public class Content {
     private Set<Byte[]> data;
+    // Number of jobs in WaitGroup
     private int jobs = 0;
     private Content() {
         this.data = Collections.newSetFromMap(new ConcurrentHashMap<Byte[], Boolean>());
@@ -36,16 +37,19 @@ public class Content {
         return this.data.add(toObjects(val));
     }
 
+    // Increment jobs counter
     public synchronized void add(int i) {
         jobs += i;
     }
 
+    // Decrement jobs counter and free resource if finished
     public synchronized void done() {
         if (--jobs == 0) {
             notifyAll();
         }
     }
 
+    // Wait before jobs done
     public synchronized void await() throws InterruptedException {
         while (jobs > 0) {
             wait();
