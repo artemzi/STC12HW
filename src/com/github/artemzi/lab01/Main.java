@@ -1,11 +1,7 @@
 package com.github.artemzi.lab01;
 
-import com.github.artemzi.lab01.content.Content;
-import com.github.artemzi.lab01.content.ContentParser;
-import com.github.artemzi.lab01.utils.TypeConverter;
 import com.github.artemzi.lab01.main.Occurrences;
 
-import java.nio.charset.StandardCharsets;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Logger;
 
@@ -21,10 +17,10 @@ public class Main {
                     "https://en.wikinews.org/wiki/Pop_culture_celebrated_at_Fan_Expo_Canada_2016_in_Toronto",
                     "https://en.wikinews.org/wiki/Wikinews_interviews_Rocky_De_La_Fuente,_U.S._Democratic_Party_presidential_candidate",
                     "file:data/lab01/test",
-                    "file:data/lab01/big"
+//                    "file:data/lab01/big"
                 },
                 new String[]{
-                    "one", "word"
+                    "chunk", "feeling", "exuberant"
                 },
                 "data"
         );
