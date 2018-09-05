@@ -40,7 +40,7 @@ public class ContentParser {
             ResultSet.getInstance().add(1);
             pool.execute(() -> {
                 String[] dataArray = new String(TypeConverter.toPrimitives(data), StandardCharsets.UTF_8)
-                        .split("[.!?]");
+                        .split("[.!?\\.{3}]");
                 compare(dataArray, words);
 
                 ResultSet.getInstance().done();

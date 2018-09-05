@@ -20,7 +20,7 @@ public class Main {
 //                    "file:data/lab01/big"
                 },
                 new String[]{
-                    "chunk", "feeling", "exuberant"
+                    "chunk", "feeling", "belief"
                 },
                 "data"
         );
