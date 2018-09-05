@@ -28,7 +28,6 @@ public class ContentRequest implements Runnable {
                     data = inputStream.read();
                     byteArrayOutputStream.write(data);
                 } while (data != -1);
-                // TODO: apply filter for data; use search option for mark data which must be stored
                 Content.getInstance().addValue(byteArrayOutputStream.toByteArray());
             } catch (IOException | CannotAddContentException e) {
                 LOGGER.info(e.getMessage());

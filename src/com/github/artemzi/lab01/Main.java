@@ -1,10 +1,7 @@
 package com.github.artemzi.lab01;
 
-import com.github.artemzi.lab01.content.Content;
-import com.github.artemzi.lab01.utils.TypeConverter;
 import com.github.artemzi.lab01.main.Occurrences;
 
-import java.nio.charset.StandardCharsets;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Logger;
 
@@ -19,23 +16,14 @@ public class Main {
                     "https://en.wikinews.org/wiki/Judge_jails_%27monstrous%27_London_serial_killer_Stephen_Port",
                     "https://en.wikinews.org/wiki/Pop_culture_celebrated_at_Fan_Expo_Canada_2016_in_Toronto",
                     "https://en.wikinews.org/wiki/Wikinews_interviews_Rocky_De_La_Fuente,_U.S._Democratic_Party_presidential_candidate",
-                    "file:data/lab01/test"
+                    "file:data/lab01/test",
+//                    "file:data/lab01/big"
                 },
                 new String[]{
-                    "one", "word"
+                    "chunk", "feeling", "exuberant"
                 },
                 "data"
         );
-
-        try {
-            Content.getInstance().await();
-        } catch (InterruptedException e) {
-            LOGGER.info("Counter.await was broken.");
-        }
-
-        for (Byte[] data : Content.getInstance().getData()) {
-            System.out.println(new String(TypeConverter.toPrimitives(data), StandardCharsets.UTF_8));
-        }
 
         long timeElapsed = TimeUnit.NANOSECONDS.toSeconds(System.nanoTime() - START_TIME) + 1;
         LOGGER.info("[done] Total execution time: " + timeElapsed + " seconds");

@@ -2,6 +2,8 @@ package com.github.artemzi.lab01.utils;
 
 public class TypeConverter {
 
+    private TypeConverter(){}
+
     public static Byte[] toObjects(byte[] bytesPrim) {
         Byte[] bytes = new Byte[bytesPrim.length];
 
