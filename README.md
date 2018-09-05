@@ -6,6 +6,6 @@ List of nearest TODOs:
 
 ... Find better test data
 1. Add tests (`yeah sure...`)
-2. Implement caching for documents
-3. Parse document, search words
-4. etc.
+2. Debug
+3. Check code, make it readable
+... etc.
