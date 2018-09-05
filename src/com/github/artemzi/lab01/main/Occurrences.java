@@ -1,6 +1,7 @@
 package com.github.artemzi.lab01.main;
 
 import com.github.artemzi.lab01.content.Content;
+import com.github.artemzi.lab01.content.ContentParser;
 import com.github.artemzi.lab01.content.ContentRequest;
 
 import java.util.concurrent.ExecutorService;
@@ -17,6 +18,8 @@ public class Occurrences implements OccurrencesContact {
     @Override
     public void getOccurrences(String[] sources, String[] words, String res) {
         executor(sources);
+
+        ContentParser.parse();
     }
 
     private void executor(String[] resources) {

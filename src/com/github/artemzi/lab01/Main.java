@@ -29,8 +29,6 @@ public class Main {
                 "data"
         );
 
-        ContentParser.parse();
-
         long timeElapsed = TimeUnit.NANOSECONDS.toSeconds(System.nanoTime() - START_TIME) + 1;
         LOGGER.info("[done] Total execution time: " + timeElapsed + " seconds");
     }
