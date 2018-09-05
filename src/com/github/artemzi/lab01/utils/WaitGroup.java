@@ -1,4 +1,4 @@
-package com.github.artemzi.lab01.lib;
+package com.github.artemzi.lab01.utils;
 
 public class WaitGroup {
     // Number of jobs in WaitGroup

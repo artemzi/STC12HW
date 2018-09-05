@@ -1,6 +1,8 @@
-package com.github.artemzi.lab01;
+package com.github.artemzi.lab01.content;
 
-import com.github.artemzi.lab01.lib.WaitGroup;
+import com.github.artemzi.lab01.exceptions.CannotAddContentException;
+import com.github.artemzi.lab01.utils.TypeConverter;
+import com.github.artemzi.lab01.utils.WaitGroup;
 
 import java.util.Collections;
 import java.util.Set;
@@ -33,28 +35,11 @@ public class Content extends WaitGroup {
         return data;
     }
 
-    public boolean addValue(byte[] val) {
-        return this.data.add(toObjects(val));
-    }
-
-    // TODO: do i need it here?
-    private Byte[] toObjects(byte[] bytesPrim) {
-        Byte[] bytes = new Byte[bytesPrim.length];
-
-        int i = 0;
-        for (byte b : bytesPrim) bytes[i++] = b; // Autoboxing
-
-        return bytes;
-    }
-
-    // TODO: do i ever need it?
-    public byte[] toPrimitives(Byte[] oBytes) {
-        byte[] bytes = new byte[oBytes.length];
-
-        for(int i = 0; i < oBytes.length; i++) {
-            bytes[i] = oBytes[i];
+    public void addValue(byte[] val) throws CannotAddContentException {
+        boolean added = this.data.add(TypeConverter.toObjects(val));
+        if (!added) {
+            throw new CannotAddContentException("Cannot add value to dataset");
         }
-
-        return bytes;
+        Content.getInstance().done(); // Remove job from WaitGroup
     }
 }

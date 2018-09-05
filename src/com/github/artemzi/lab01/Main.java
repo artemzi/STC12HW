@@ -1,9 +1,15 @@
 package com.github.artemzi.lab01;
 
+import com.github.artemzi.lab01.content.Content;
+import com.github.artemzi.lab01.utils.TypeConverter;
+import com.github.artemzi.lab01.main.Occurrences;
+
 import java.nio.charset.StandardCharsets;
+import java.util.concurrent.TimeUnit;
 import java.util.logging.Logger;
 
 public class Main {
+    private static final long START_TIME = System.nanoTime();
     private static final Logger LOGGER = Logger.getLogger(Main.class.getName());
 
     public static void main(String[] args) {
@@ -28,8 +34,10 @@ public class Main {
         }
 
         for (Byte[] data : Content.getInstance().getData()) {
-            System.out.println(new String(Content.getInstance().toPrimitives(data), StandardCharsets.UTF_8));
+            System.out.println(new String(TypeConverter.toPrimitives(data), StandardCharsets.UTF_8));
         }
-        LOGGER.info("DONE");
+
+        long timeElapsed = TimeUnit.NANOSECONDS.toSeconds(System.nanoTime() - START_TIME) + 1;
+        LOGGER.info("[done] Total execution time: " + timeElapsed + " seconds");
     }
 }

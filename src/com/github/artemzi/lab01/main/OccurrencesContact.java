@@ -1,4 +1,4 @@
-package com.github.artemzi.lab01;
+package com.github.artemzi.lab01.main;
 
 import java.io.IOException;
 
