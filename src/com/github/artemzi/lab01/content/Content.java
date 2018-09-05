@@ -1,7 +1,7 @@
-package com.github.artemzi.lab01;
+package com.github.artemzi.lab01.content;
 
-import com.github.artemzi.lab01.lib.TypeConverter;
-import com.github.artemzi.lab01.lib.WaitGroup;
+import com.github.artemzi.lab01.utils.TypeConverter;
+import com.github.artemzi.lab01.utils.WaitGroup;
 
 import java.util.Collections;
 import java.util.Set;

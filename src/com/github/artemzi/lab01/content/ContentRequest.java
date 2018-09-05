@@ -1,4 +1,4 @@
-package com.github.artemzi.lab01;
+package com.github.artemzi.lab01.content;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -11,7 +11,7 @@ public class ContentRequest implements Runnable {
     private String path;
     private static final Logger LOGGER = Logger.getLogger(ContentRequest.class.getName());
 
-    ContentRequest(String path) {
+    public ContentRequest(String path) {
         this.path = path;
     }
 
@@ -26,14 +26,15 @@ public class ContentRequest implements Runnable {
                     data = inputStream.read();
                     byteArrayOutputStream.write(data);
                 } while (data != -1);
-
+                // TODO: apply filter for data; use search option for mark data which must be stored
                 boolean added = Content.getInstance().addValue(byteArrayOutputStream.toByteArray());
                 if (added) { // TODO: add exception?
                     LOGGER.info("New value was added to Content" + byteArrayOutputStream.toByteArray().hashCode());
-                    Content.getInstance().done(); // Remove one job from WaitGroup
                 } else {
                     LOGGER.warning("Can't add content");
                 }
+                // If there is an error, we must also mark job as done, for avoiding deadlock
+                Content.getInstance().done();
             } catch (IOException e) {
                 LOGGER.info(e.getMessage());
             }

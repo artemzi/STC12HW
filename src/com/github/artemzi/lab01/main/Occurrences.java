@@ -1,4 +1,7 @@
-package com.github.artemzi.lab01;
+package com.github.artemzi.lab01.main;
+
+import com.github.artemzi.lab01.content.Content;
+import com.github.artemzi.lab01.content.ContentRequest;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -7,7 +10,7 @@ public class Occurrences implements OccurrencesContact {
     private static final int MAX_T = 20;
     private ExecutorService pool;
 
-    Occurrences() {
+    public Occurrences() {
         pool = Executors.newFixedThreadPool(MAX_T);
     }
 
