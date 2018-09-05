@@ -1,5 +1,7 @@
 package com.github.artemzi.lab01.content;
 
+import com.github.artemzi.lab01.exceptions.CannotAddContentException;
+
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -27,15 +29,8 @@ public class ContentRequest implements Runnable {
                     byteArrayOutputStream.write(data);
                 } while (data != -1);
                 // TODO: apply filter for data; use search option for mark data which must be stored
-                boolean added = Content.getInstance().addValue(byteArrayOutputStream.toByteArray());
-                if (added) { // TODO: add exception?
-                    LOGGER.info("New value was added to Content" + byteArrayOutputStream.toByteArray().hashCode());
-                } else {
-                    LOGGER.warning("Can't add content");
-                }
-                // If there is an error, we must also mark job as done, for avoiding deadlock
-                Content.getInstance().done();
-            } catch (IOException e) {
+                Content.getInstance().addValue(byteArrayOutputStream.toByteArray());
+            } catch (IOException | CannotAddContentException e) {
                 LOGGER.info(e.getMessage());
             }
         }

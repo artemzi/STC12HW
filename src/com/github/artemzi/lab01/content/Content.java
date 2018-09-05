@@ -1,5 +1,6 @@
 package com.github.artemzi.lab01.content;
 
+import com.github.artemzi.lab01.exceptions.CannotAddContentException;
 import com.github.artemzi.lab01.utils.TypeConverter;
 import com.github.artemzi.lab01.utils.WaitGroup;
 
@@ -34,7 +35,11 @@ public class Content extends WaitGroup {
         return data;
     }
 
-    public boolean addValue(byte[] val) {
-        return this.data.add(TypeConverter.toObjects(val));
+    public void addValue(byte[] val) throws CannotAddContentException {
+        boolean added = this.data.add(TypeConverter.toObjects(val));
+        if (!added) {
+            throw new CannotAddContentException("Cannot add value to dataset");
+        }
+        Content.getInstance().done(); // Remove job from WaitGroup
     }
 }
