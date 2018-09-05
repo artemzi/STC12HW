@@ -1,6 +1,7 @@
 package com.github.artemzi.lab01;
 
 import com.github.artemzi.lab01.content.Content;
+import com.github.artemzi.lab01.content.ContentParser;
 import com.github.artemzi.lab01.utils.TypeConverter;
 import com.github.artemzi.lab01.main.Occurrences;
 
@@ -28,15 +29,7 @@ public class Main {
                 "data"
         );
 
-        try {
-            Content.getInstance().await();
-        } catch (InterruptedException e) {
-            LOGGER.info("Counter.await was broken.");
-        }
-
-        for (Byte[] data : Content.getInstance().getData()) {
-            System.out.println(new String(TypeConverter.toPrimitives(data), StandardCharsets.UTF_8));
-        }
+        ContentParser.parse();
 
         long timeElapsed = TimeUnit.NANOSECONDS.toSeconds(System.nanoTime() - START_TIME) + 1;
         LOGGER.info("[done] Total execution time: " + timeElapsed + " seconds");
