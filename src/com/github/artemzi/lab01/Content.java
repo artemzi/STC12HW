@@ -1,5 +1,6 @@
 package com.github.artemzi.lab01;
 
+import com.github.artemzi.lab01.lib.TypeConverter;
 import com.github.artemzi.lab01.lib.WaitGroup;
 
 import java.util.Collections;
@@ -34,27 +35,6 @@ public class Content extends WaitGroup {
     }
 
     public boolean addValue(byte[] val) {
-        return this.data.add(toObjects(val));
-    }
-
-    // TODO: do i need it here?
-    private Byte[] toObjects(byte[] bytesPrim) {
-        Byte[] bytes = new Byte[bytesPrim.length];
-
-        int i = 0;
-        for (byte b : bytesPrim) bytes[i++] = b; // Autoboxing
-
-        return bytes;
-    }
-
-    // TODO: do i ever need it?
-    public byte[] toPrimitives(Byte[] oBytes) {
-        byte[] bytes = new byte[oBytes.length];
-
-        for(int i = 0; i < oBytes.length; i++) {
-            bytes[i] = oBytes[i];
-        }
-
-        return bytes;
+        return this.data.add(TypeConverter.toObjects(val));
     }
 }

@@ -1,5 +1,7 @@
 package com.github.artemzi.lab01;
 
+import com.github.artemzi.lab01.lib.TypeConverter;
+
 import java.nio.charset.StandardCharsets;
 import java.util.logging.Logger;
 
@@ -28,7 +30,7 @@ public class Main {
         }
 
         for (Byte[] data : Content.getInstance().getData()) {
-            System.out.println(new String(Content.getInstance().toPrimitives(data), StandardCharsets.UTF_8));
+            System.out.println(new String(TypeConverter.toPrimitives(data), StandardCharsets.UTF_8));
         }
         LOGGER.info("DONE");
     }
