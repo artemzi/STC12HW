@@ -24,5 +24,5 @@ import java.io.IOException;
  * Слово это последовательность символов кириллических, либо латинских.
  */
 public interface OccurrencesContact {
-    void getOccurrences(String[] sources, String[] words, String res) throws IOException;
+    void getOccurrences(String[] sources, String[] words, String res) throws IOException, InterruptedException;
 }
