@@ -4,8 +4,6 @@ import com.github.artemzi.lab01.main.Occurrences;
 import com.github.artemzi.lab01.utils.TypeConverter;
 
 import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Set;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
