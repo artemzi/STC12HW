@@ -27,6 +27,7 @@ public class Client {
 
                     if (!(msg = scanner.nextLine()).equals("")) { // if got message from console send it to server
                         out.println(msg);
+                        out.flush();
                     }
                 }
             }

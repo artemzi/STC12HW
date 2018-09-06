@@ -53,7 +53,8 @@ public class ChatServer {
 
                 while (true) {
                     String input = in.readLine();
-                    System.out.printf("[LOG] client #%s send %s%n", clientNumber, input);
+                    System.out.printf("[LOG] client #%s send:%n\t %s%n", clientNumber, input);
+                    out.println("Got your message");
                 }
             } catch (IOException e) {
                 System.err.printf("[error with client# %s] %s%n", clientNumber, e.getMessage());
