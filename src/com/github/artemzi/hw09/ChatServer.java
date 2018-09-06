@@ -20,13 +20,11 @@ public class ChatServer {
     public static void main(String[] args) throws Exception {
 
         int clientNumber = 0x12345;
-        ServerSocket listener = new ServerSocket(19898);
-        try {
+
+        try(ServerSocket listener = new ServerSocket(19898);) {
             while (true) {
                 new WorkerThread(listener.accept(), clientNumber++).start();
             }
-        } finally {
-            listener.close();
         }
     }
 
