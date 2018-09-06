@@ -1,3 +1,5 @@
 .idea/*
 out/*
-data/lab01/big
+
+# ignore big files
+data/lab01/*

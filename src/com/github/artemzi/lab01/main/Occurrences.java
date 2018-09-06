@@ -4,11 +4,15 @@ import com.github.artemzi.lab01.content.Content;
 import com.github.artemzi.lab01.content.ContentParser;
 import com.github.artemzi.lab01.content.ContentRequest;
 
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.util.HashSet;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 public class Occurrences implements OccurrencesContact {
+    private static final String FILE_PATH = "data/lab01/";
     private static final int MAX_T = 20;
     private ExecutorService pool;
 
@@ -17,11 +21,13 @@ public class Occurrences implements OccurrencesContact {
     }
 
     @Override
-    public void getOccurrences(String[] sources, String[] words, String res) {
+    public void getOccurrences(String[] sources, String[] words, String res) throws IOException {
         executor(sources);
 
         HashSet<String> result = new HashSet<>(ContentParser.parse(words));
-        System.out.println(result);
+        try (ObjectOutputStream outputStream = new ObjectOutputStream(new FileOutputStream(FILE_PATH + res, false));) {
+            outputStream.writeObject(result);
+        }
     }
 
     private void executor(String[] resources) {
