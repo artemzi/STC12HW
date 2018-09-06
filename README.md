@@ -1,11 +1,9 @@
 ### lab01
 ==========
-For now done with requests and getting results.
+For now done
 
-List of nearest TODOs:
+![screenshot](data/screenshots/lab01.png "lab01")
 
-... Find better test data
-1. Add tests (`yeah sure...`)
-2. Debug
-3. Check code, make it readable
-... etc.
+todo: 
+1. check if url available && find what to do in this case
+2. ... and more; code is not ready for production.
