@@ -44,10 +44,6 @@ public class ChatServer {
             System.out.printf("[new connection client# %s] at %s%n", clientNumber, socket);
         }
 
-        /**
-         * Server wait for client messages. To close client connection
-         * server expect period (dot) symbol.
-         */
         @Override
         public void run() {
             try(BufferedReader in = new BufferedReader(
@@ -59,10 +55,7 @@ public class ChatServer {
 
                 while (true) {
                     String input = in.readLine();
-                    if (input == null || input.equals(".")) {
-                        break;
-                    }
-                    out.println(input.toUpperCase());
+                    System.out.printf("[LOG] client #%s send %s%n", clientNumber, input);
                 }
             } catch (IOException e) {
                 System.err.printf("[error with client# %s] %s%n", clientNumber, e.getMessage());
