@@ -18,17 +18,18 @@ public class Main {
                         "https://en.wikinews.org/wiki/Judge_jails_%27monstrous%27_London_serial_killer_Stephen_Port",
                         "https://en.wikinews.org/wiki/Pop_culture_celebrated_at_Fan_Expo_Canada_2016_in_Toronto",
                         "https://en.wikinews.org/wiki/Wikinews_interviews_Rocky_De_La_Fuente,_U.S._Democratic_Party_presidential_candidate",
-                        "file:data/lab01/test",
-                        "file:data/lab01/bible.txt",
-                        "file:data/lab01/world192.txt",
-                        "file:data/lab01/data",
+                        "file:data/lab01/test", // 1.1K
+                        "file:data/lab01/test2", // 1.1M
+                        "file:data/lab01/bible.txt", // 24M
+                        "file:data/lab01/world192.txt", // 2.4M
+                        "file:data/lab01/world", // 2.4G
                     },
                     new String[]{
-                        "chunk", "feeling", "belief"
+                        "chunk", "became"
                     },
                     "RESULT"
             );
-        } catch (IOException e) {
+        } catch (IOException | InterruptedException e) {
             LOGGER.warning(e.getMessage());
         }
 

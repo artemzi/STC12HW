@@ -1,5 +1,6 @@
 package com.github.artemzi.lab01.content;
 
+import com.github.artemzi.lab01.exceptions.CannotAddContentException;
 import com.github.artemzi.lab01.utils.WaitGroup;
 
 import java.util.Collections;
@@ -24,7 +25,10 @@ public class ResultSet extends WaitGroup {
         return data;
     }
 
-    public void addData(String data) {
-        this.data.add(data);
+    public void addData(String data) throws CannotAddContentException {
+        boolean added = this.data.add(data);
+        if (!added) {
+            throw new CannotAddContentException("Cannot add sentence to collection");
+        }
     }
 }

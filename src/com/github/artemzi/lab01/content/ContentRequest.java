@@ -2,19 +2,19 @@ package com.github.artemzi.lab01.content;
 
 import com.github.artemzi.lab01.exceptions.CannotAddContentException;
 
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.logging.Logger;
 
 public class ContentRequest implements Runnable {
     private String path;
+    private static String[] words;
     private static final Logger LOGGER = Logger.getLogger(ContentRequest.class.getName());
 
-    public ContentRequest(String path) {
+    public ContentRequest(String path, String[] wordsList) {
         this.path = path;
+        words = wordsList;
     }
 
     @Override
@@ -22,15 +22,36 @@ public class ContentRequest implements Runnable {
         URL url = this.getUrl();
         if (url != null) {
             try (InputStream inputStream = url.openStream();
-                 ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();) {
+                 BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));) {
+
+                StringBuilder buffer = new StringBuilder();
                 int data = 0;
-                do {
-                    data = inputStream.read();
-                    byteArrayOutputStream.write(data);
-                } while (data != -1);
-                Content.getInstance().addValue(byteArrayOutputStream.toByteArray());
-            } catch (IOException | CannotAddContentException e) {
-                LOGGER.info(e.getMessage());
+                while ((data = reader.read()) != -1) {
+                    char rune = (char) data;
+                    if (rune == '.' || rune == '!' || rune == '?') {
+                        compareWithWordsAndSave(buffer.toString());
+                        buffer = new StringBuilder(); // clean up
+                    } else {
+                        buffer.append(rune);
+                    }
+                }
+
+                ResultSet.getInstance().done(); // remove job from WaitGroup
+            } catch (IOException e) {
+                LOGGER.warning(e.getMessage());
+            }
+        }
+    }
+
+    private static void compareWithWordsAndSave(String sentence) {
+        for (String w : words) {
+            if (sentence.toLowerCase().contains(w.toLowerCase())) {
+                try {
+                    ResultSet.getInstance().addData(sentence);
+                } catch (CannotAddContentException e) {
+                    LOGGER.warning(e.getMessage());
+                }
+                break; // if word found there is no need to search more
             }
         }
     }
@@ -41,7 +62,7 @@ public class ContentRequest implements Runnable {
             url = new URL(this.path);
             LOGGER.info("URL created: " + url.toString());
         } catch (MalformedURLException e) {
-            System.err.println(e.getMessage());
+            LOGGER.warning(e.getMessage());
         }
         return url;
     }
