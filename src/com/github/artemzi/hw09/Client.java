@@ -25,7 +25,7 @@ public class Client {
                 } else {
                     System.out.println(response);
 
-                    if (!(msg = scanner.nextLine()).equals("")) {
+                    if (!(msg = scanner.nextLine()).equals("")) { // if got message from console send it to server
                         out.println(msg);
                     }
                 }
