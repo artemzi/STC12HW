@@ -6,6 +6,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Logger;
 
@@ -28,12 +29,14 @@ public class Main {
 
     public static void main(String[] args) {
         Occurrences o = new Occurrences();
+        Scanner in = new Scanner(System.in);
+        in.nextLine();
 
         try {
             o.getOccurrences(
                     getFIleNames(),
                     new String[]{
-                        "chunk", "became"
+                        "tortor", "risus"
                     },
                     "RESULT"
             );

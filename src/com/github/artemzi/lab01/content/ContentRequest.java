@@ -1,8 +1,9 @@
 package com.github.artemzi.lab01.content;
 
-import com.github.artemzi.lab01.exceptions.CannotAddContentException;
-
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.logging.Logger;
@@ -46,11 +47,7 @@ public class ContentRequest implements Runnable {
     private static void compareWithWordsAndSave(String sentence) {
         for (String w : words) {
             if (sentence.toLowerCase().contains(w.toLowerCase())) {
-                try {
-                    ResultSet.getInstance().addData(sentence);
-                } catch (CannotAddContentException e) {
-                    LOGGER.warning(e.getMessage());
-                }
+                ResultSet.getInstance().addData(sentence);
                 break; // if word found there is no need to search more
             }
         }
