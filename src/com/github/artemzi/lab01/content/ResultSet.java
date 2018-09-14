@@ -1,12 +1,10 @@
 package com.github.artemzi.lab01.content;
 
-import com.github.artemzi.lab01.utils.WaitGroup;
-
 import java.util.Collections;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
-public class ResultSet extends WaitGroup {
+public class ResultSet {
     private Set<String> data;
     private ResultSet() {
         this.data = Collections.newSetFromMap(new ConcurrentHashMap<String, Boolean>());
