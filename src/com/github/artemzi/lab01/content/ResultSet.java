@@ -1,11 +1,5 @@
 package com.github.artemzi.lab01.content;
 
-<<<<<<< Updated upstream
-import com.github.artemzi.lab01.exceptions.CannotAddContentException;
-import com.github.artemzi.lab01.utils.WaitGroup;
-
-=======
->>>>>>> Stashed changes
 import java.util.Collections;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
@@ -28,10 +22,7 @@ public class ResultSet {
         return data;
     }
 
-    public void addData(String data) throws CannotAddContentException {
-        boolean added = this.data.add(data);
-        if (!added) {
-            throw new CannotAddContentException("Cannot add sentence to collection");
-        }
+    public void addData(String data) {
+        this.data.add(data);
     }
 }

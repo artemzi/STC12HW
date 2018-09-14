@@ -2,7 +2,11 @@ package com.github.artemzi.lab01;
 
 import com.github.artemzi.lab01.main.Occurrences;
 
+import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Logger;
 
@@ -10,22 +14,29 @@ public class Main {
     private static final long START_TIME = System.nanoTime();
     private static final Logger LOGGER = Logger.getLogger(Main.class.getName());
 
+    public static String[] getFIleNames() {
+        File folder = new File("data/lab01/testSet");
+        File[] listOfFiles = folder.listFiles();
+        List<String> results = new ArrayList<>();
+
+        for (int i = 0; i < listOfFiles.length; i++) {
+            if (listOfFiles[i].isFile()) {
+                results.add("file:data/lab01/testSet/" + listOfFiles[i].getName());
+            }
+        }
+        return results.toArray(new String[0]);
+    }
+
     public static void main(String[] args) {
         Occurrences o = new Occurrences();
+        Scanner in = new Scanner(System.in);
+        in.nextLine();
+
         try {
             o.getOccurrences(
+                    getFIleNames(),
                     new String[]{
-                        "https://en.wikinews.org/wiki/Judge_jails_%27monstrous%27_London_serial_killer_Stephen_Port",
-                        "https://en.wikinews.org/wiki/Pop_culture_celebrated_at_Fan_Expo_Canada_2016_in_Toronto",
-                        "https://en.wikinews.org/wiki/Wikinews_interviews_Rocky_De_La_Fuente,_U.S._Democratic_Party_presidential_candidate",
-                        "file:data/lab01/test", // 1.1K
-                        "file:data/lab01/test2", // 1.1M
-                        "file:data/lab01/bible.txt", // 24M
-                        "file:data/lab01/world192.txt", // 2.4M
-                        "file:data/lab01/world", // 2.4G
-                    },
-                    new String[]{
-                        "chunk", "became"
+                        "tortor", "risus"
                     },
                     "RESULT"
             );
