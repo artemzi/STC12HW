@@ -23,7 +23,7 @@ public class Occurrences implements OccurrencesContact {
     }
 
     @Override
-    public void getOccurrences(String[] sources, String[] words, String res) throws IOException, InterruptedException {
+    public void getOccurrences(String[] sources, String[] words, String res) throws IOException {
         executor(sources, words);
 
         HashSet<String> result = new HashSet<>(ResultSet.getInstance().getData());
@@ -42,9 +42,5 @@ public class Occurrences implements OccurrencesContact {
         } catch (InterruptedException e) {
             LOGGER.warning(e.getMessage());
         }
-    }
-
-    public static int getMaxT() {
-        return MAX_T;
     }
 }
