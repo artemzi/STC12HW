@@ -14,14 +14,15 @@ public class Main {
     private static final long START_TIME = System.nanoTime();
     private static final Logger LOGGER = Logger.getLogger(Main.class.getName());
 
-    public static String[] getFIleNames() {
+    private static String[] getFIleNames() {
         File folder = new File("data/lab01/testSet");
         File[] listOfFiles = folder.listFiles();
         List<String> results = new ArrayList<>();
 
-        for (int i = 0; i < listOfFiles.length; i++) {
-            if (listOfFiles[i].isFile()) {
-                results.add("file:data/lab01/testSet/" + listOfFiles[i].getName());
+        assert listOfFiles != null;
+        for (File listOfFile : listOfFiles) {
+            if (listOfFile.isFile()) {
+                results.add("file:data/lab01/testSet/" + listOfFile.getName());
             }
         }
         return results.toArray(new String[0]);
