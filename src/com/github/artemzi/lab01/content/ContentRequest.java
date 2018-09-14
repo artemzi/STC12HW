@@ -35,8 +35,6 @@ public class ContentRequest implements Runnable {
                         buffer.append(rune);
                     }
                 }
-
-                ResultSet.getInstance().done(); // remove job from WaitGroup
             } catch (IOException e) {
                 LOGGER.warning(e.getMessage());
             }
