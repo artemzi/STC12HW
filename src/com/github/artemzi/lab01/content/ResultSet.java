@@ -7,7 +7,7 @@ import java.util.concurrent.ConcurrentHashMap;
 public class ResultSet {
     private Set<String> data;
     private ResultSet() {
-        this.data = Collections.newSetFromMap(new ConcurrentHashMap<String, Boolean>());
+        this.data = Collections.newSetFromMap(new ConcurrentHashMap<>());
     }
 
     private static class ResultSetHolder {
