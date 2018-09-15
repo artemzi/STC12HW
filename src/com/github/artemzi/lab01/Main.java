@@ -3,7 +3,6 @@ package com.github.artemzi.lab01;
 import com.github.artemzi.lab01.main.Occurrences;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
