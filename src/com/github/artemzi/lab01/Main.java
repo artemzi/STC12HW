@@ -37,11 +37,11 @@ public class Main {
             o.getOccurrences(
                     getFIleNames(),
                     new String[]{
-                        "tortor", "risus"
+                        "tortor", "risus", "Rlbfeaj", "Veykpth", "asioynp", "quubpqhpd"
                     },
                     "RESULT"
             );
-        } catch (IOException | InterruptedException e) {
+        } catch (InterruptedException e) {
             LOGGER.warning(e.getMessage());
         }
 

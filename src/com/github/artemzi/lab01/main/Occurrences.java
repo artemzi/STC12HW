@@ -1,20 +1,16 @@
 package com.github.artemzi.lab01.main;
 
 import com.github.artemzi.lab01.content.ContentRequest;
-import com.github.artemzi.lab01.content.ResultSet;
 
-import java.io.FileOutputStream;
+import java.io.File;
 import java.io.IOException;
-import java.io.ObjectOutputStream;
-import java.util.HashSet;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.TimeUnit;
+import java.io.PrintWriter;
+import java.util.concurrent.*;
 import java.util.logging.Logger;
 
 public class Occurrences implements OccurrencesContact {
-    private static final Logger LOGGER = Logger.getLogger(ContentRequest.class.getName());
     private static final String FILE_PATH = "data/lab01/";
+    private static final Logger LOGGER = Logger.getLogger(ContentRequest.class.getName());
     private static final int MAX_T = 20;
     private ExecutorService pool;
 
@@ -23,24 +19,23 @@ public class Occurrences implements OccurrencesContact {
     }
 
     @Override
-    public void getOccurrences(String[] sources, String[] words, String res) throws IOException {
-        executor(sources, words);
-
-        HashSet<String> result = new HashSet<>(ResultSet.getInstance().getData());
-        try (ObjectOutputStream outputStream = new ObjectOutputStream(new FileOutputStream(FILE_PATH + res, false));) {
-            outputStream.writeObject(result);
-        }
-    }
-
-    private void executor(String[] resources, String[] words) {
-        for (String source : resources) {
-            pool.execute(new ContentRequest(source, words));
+    public void getOccurrences(String[] sources, String[] words, String res) throws InterruptedException {
+        BlockingQueue<String> queue = new LinkedBlockingQueue<>();
+        Thread fileWriter = new Thread(new Thread(() -> {
+            try (PrintWriter writer = new PrintWriter(new File(FILE_PATH + res));) {
+                while (true) {
+                    writer.println(queue.take());
+                }
+            } catch (IOException | InterruptedException e) {
+                LOGGER.warning(e.getMessage());
+            }
+        }));
+        fileWriter.start();
+        for (String source : sources) {
+            pool.execute(new ContentRequest(source, words, queue));
         }
         pool.shutdown();
-        try {
-            pool.awaitTermination(Long.MAX_VALUE, TimeUnit.NANOSECONDS);
-        } catch (InterruptedException e) {
-            LOGGER.warning(e.getMessage());
-        }
+        pool.awaitTermination(Long.MAX_VALUE, TimeUnit.NANOSECONDS);
+        fileWriter.interrupt();
     }
 }
