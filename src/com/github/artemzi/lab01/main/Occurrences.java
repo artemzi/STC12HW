@@ -24,7 +24,7 @@ public class Occurrences implements OccurrencesContact {
         Thread fileWriter = new Thread(() -> {
             try (PrintWriter writer = new PrintWriter(new File(FILE_PATH + res));) {
                 while (true) {
-                    writer.println(queue.take());
+                    writer.println(queue.take()); // take() will wait for content in queue if it not already exists
                 }
             } catch (IOException | InterruptedException e) {
                 LOGGER.warning(e.getMessage());
