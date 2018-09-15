@@ -42,7 +42,7 @@ public class Main {
                     "RESULT"
             );
         } catch (InterruptedException e) {
-            LOGGER.warning(e.getMessage());
+            LOGGER.info("[getOccurrences] was terminated.");
         }
 
         long timeElapsed = TimeUnit.NANOSECONDS.toSeconds(System.nanoTime() - START_TIME) + 1;
