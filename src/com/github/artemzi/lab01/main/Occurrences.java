@@ -36,6 +36,6 @@ public class Occurrences implements OccurrencesContact {
         }
         pool.shutdown();
         pool.awaitTermination(Long.MAX_VALUE, TimeUnit.NANOSECONDS);
-        fileWriter.interrupt();
+        fileWriter.interrupt(); // rescue fileWriter from infinity loop
     }
 }
