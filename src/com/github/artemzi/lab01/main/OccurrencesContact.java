@@ -1,7 +1,5 @@
 package com.github.artemzi.lab01.main;
 
-import java.io.IOException;
-
 /**
  * Рализовать следующий интерфейс:
  *
@@ -24,5 +22,5 @@ import java.io.IOException;
  * Слово это последовательность символов кириллических, либо латинских.
  */
 public interface OccurrencesContact {
-    void getOccurrences(String[] sources, String[] words, String res) throws IOException;
+    void getOccurrences(String[] sources, String[] words, String res) throws InterruptedException;
 }
