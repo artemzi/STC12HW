@@ -36,7 +36,7 @@ public class Main {
             o.getOccurrences(
                     getFIleNames(),
                     new String[]{
-                        "tortor", "risus", "Rlbfeaj", "Veykpth", "asioynp", "quubpqhpd"
+                        "tortor", "risus", "Rlbfeaj", "Veykpth", "asioynp", "quubpqhpd", "Lorem", "ipsum"
                     },
                     "RESULT"
             );
