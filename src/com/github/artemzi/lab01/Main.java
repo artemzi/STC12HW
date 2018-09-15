@@ -3,7 +3,6 @@ package com.github.artemzi.lab01;
 import com.github.artemzi.lab01.main.Occurrences;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -37,12 +36,12 @@ public class Main {
             o.getOccurrences(
                     getFIleNames(),
                     new String[]{
-                        "tortor", "risus", "Rlbfeaj", "Veykpth", "asioynp", "quubpqhpd"
+                        "tortor", "risus", "Rlbfeaj", "Veykpth", "asioynp", "quubpqhpd", "Lorem", "ipsum"
                     },
                     "RESULT"
             );
         } catch (InterruptedException e) {
-            LOGGER.warning(e.getMessage());
+            LOGGER.info("[getOccurrences] was terminated.");
         }
 
         long timeElapsed = TimeUnit.NANOSECONDS.toSeconds(System.nanoTime() - START_TIME) + 1;
