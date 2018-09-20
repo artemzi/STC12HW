@@ -1,11 +1,13 @@
-package com.github.artemzi.hw15.realExample.dao;
+package com.github.artemzi.hw15.realExample.connectionManager;
 
-import com.github.artemzi.hw15.realExample.connectionManager.ConnectionManager;
 import com.github.artemzi.hw15.realExample.exeptions.DAOConfigurationException;
 
 import java.sql.Connection;
 import java.sql.SQLException;
 
+/**
+ * Create connection contract based on provided options
+ */
 public abstract class FactoryDAO {
     private static final String PROPERTY_URL = "url";
     private static final String PROPERTY_DRIVER = "driver";
@@ -23,7 +25,7 @@ public abstract class FactoryDAO {
         String password = properties.getProperty(PROPERTY_PASSWORD, false);
         String username = properties.getProperty(PROPERTY_USERNAME, password != null);
 
-        try {
+        try { // check if correct driver was loaded
             Class.forName(driverClassName);
         } catch (ClassNotFoundException e) {
             throw new DAOConfigurationException(

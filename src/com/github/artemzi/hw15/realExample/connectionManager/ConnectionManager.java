@@ -1,7 +1,5 @@
 package com.github.artemzi.hw15.realExample.connectionManager;
 
-import com.github.artemzi.hw15.realExample.dao.FactoryDAO;
-
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;

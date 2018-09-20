@@ -9,7 +9,7 @@ public class Student implements Serializable {
     private String familyName;
     private int age;
     private String contact;
-    private int city;
+    private int city_id;
 
     public Student(int id, String name, String familyName, int age, String contact, int city) {
         this.id = id;
@@ -17,7 +17,7 @@ public class Student implements Serializable {
         this.familyName = familyName;
         this.age = age;
         this.contact = contact;
-        this.city = city;
+        this.city_id = city;
     }
 
     public int getId() {
@@ -60,12 +60,12 @@ public class Student implements Serializable {
         this.contact = contact;
     }
 
-    public int getCity() {
-        return city;
+    public int getCity_id() {
+        return city_id;
     }
 
-    public void setCity(int city) {
-        this.city = city;
+    public void setCity_id(int city_id) {
+        this.city_id = city_id;
     }
 
     @Override
@@ -75,7 +75,7 @@ public class Student implements Serializable {
         Student student = (Student) o;
         return id == student.id &&
                 age == student.age &&
-                city == student.city &&
+                city_id == student.city_id &&
                 Objects.equals(name, student.name) &&
                 Objects.equals(familyName, student.familyName) &&
                 Objects.equals(contact, student.contact);
@@ -83,7 +83,7 @@ public class Student implements Serializable {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, familyName, age, contact, city);
+        return Objects.hash(id, name, familyName, age, contact, city_id);
     }
 
     @Override
@@ -94,7 +94,7 @@ public class Student implements Serializable {
                 ", familyName='" + familyName + '\'' +
                 ", age=" + age +
                 ", contact='" + contact + '\'' +
-                ", city=" + city +
+                ", city_id=" + city_id +
                 '}';
     }
 }

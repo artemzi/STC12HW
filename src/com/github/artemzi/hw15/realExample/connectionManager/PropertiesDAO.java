@@ -1,4 +1,4 @@
-package com.github.artemzi.hw15.realExample.dao;
+package com.github.artemzi.hw15.realExample.connectionManager;
 
 import com.github.artemzi.hw15.realExample.exeptions.DAOConfigurationException;
 
@@ -6,6 +6,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
+/**
+ * PropertiesDAO used for load configuration parameters from properties file
+ */
 public class PropertiesDAO {
     private static final String PROPERTIES_FILE = "hw15.properties";
     private static final Properties PROPERTIES = new Properties();

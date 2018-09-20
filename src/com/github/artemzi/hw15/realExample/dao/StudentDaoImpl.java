@@ -1,5 +1,6 @@
 package com.github.artemzi.hw15.realExample.dao;
 
+import com.github.artemzi.hw15.realExample.connectionManager.FactoryDAO;
 import com.github.artemzi.hw15.realExample.pojo.Student;
 
 import java.sql.Connection;
@@ -25,7 +26,7 @@ public class StudentDaoImpl implements StudentDao {
             statement.setString(2, student.getFamilyName());
             statement.setInt(3, student.getAge());
             statement.setString(4, student.getContact());
-            statement.setInt(5, student.getCity());
+            statement.setInt(5, student.getCity_id());
             statement.execute();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -64,13 +65,13 @@ public class StudentDaoImpl implements StudentDao {
         if (student.getId() != 0) {
             try (Connection connection = connectionManager.getConnection();
                 PreparedStatement statement = connection.prepareStatement(
-                "UPDATE students SET name=?, family_name=?, age=?, contact=?, city=? WHERE id=?");
+                "UPDATE students SET name=?, family_name=?, age=?, contact=?, city_id=? WHERE id=?");
             ) {
                 statement.setString(1, student.getName());
                 statement.setString(2, student.getFamilyName());
                 statement.setInt(3, student.getAge());
                 statement.setString(4, student.getContact());
-                statement.setInt(5, student.getCity());
+                statement.setInt(5, student.getCity_id());
                 statement.setInt(6, student.getId());
                 statement.execute();
             } catch (SQLException e) {
