@@ -1,5 +1,7 @@
 package com.github.artemzi.hw15.realExample;
 
+import com.github.artemzi.hw15.realExample.dao.CityDAO;
+import com.github.artemzi.hw15.realExample.pojo.City;
 import com.github.artemzi.hw15.realExample.services.FactoryDAO;
 import com.github.artemzi.hw15.realExample.dao.DAO;
 import com.github.artemzi.hw15.realExample.dao.StudentDAO;
@@ -19,14 +21,19 @@ public class Main {
         student.setFamilyName("Doe");
         studentDao.update(student);
 
-        student = (Student) studentDao.getById(6);
+        student = studentDao.getById(6);
         System.out.println(student);
 
-        student.setName("Ivan");
-        student.setFamilyName("Sysanin");
-        studentDao.update(student);
-        System.out.println(student);
+        // ========
+        CityDAO cityDAO = new CityDAO(FactoryDAO.getInstance("javabase.jdbc"));
+        City city = cityDAO.getById(1);
+        System.out.println(city);
 
-//        studentDao.deleteById(4);
+        city.setName("Abrva");
+        city.setCitizens(1000000000);
+        cityDAO.update(city);
+
+        city = cityDAO.getById(1);
+        System.out.println(city);
     }
 }
