@@ -1,6 +1,6 @@
 package com.github.artemzi.hw15.realExample.connectionManager;
 
-import com.github.artemzi.hw15.realExample.exeptions.DAOConfigurationException;
+import com.github.artemzi.hw15.realExample.exeptions.ConfigurationExceptionDAO;
 
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -14,9 +14,9 @@ public abstract class FactoryDAO {
     private static final String PROPERTY_USERNAME = "username";
     private static final String PROPERTY_PASSWORD = "password";
 
-    public static FactoryDAO getInstance(String name) throws DAOConfigurationException {
+    public static FactoryDAO getInstance(String name) throws ConfigurationExceptionDAO {
         if (name == null) {
-            throw new DAOConfigurationException("Database name is null.");
+            throw new ConfigurationExceptionDAO("Database name is null.");
         }
 
         PropertiesDAO properties = new PropertiesDAO(name);
@@ -28,7 +28,7 @@ public abstract class FactoryDAO {
         try { // check if correct driver was loaded
             Class.forName(driverClassName);
         } catch (ClassNotFoundException e) {
-            throw new DAOConfigurationException(
+            throw new ConfigurationExceptionDAO(
                 "Driver class '" + driverClassName + "' is missing in classpath.", e);
         }
 

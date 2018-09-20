@@ -12,14 +12,14 @@ import com.github.artemzi.hw15.realExample.pojo.Student;
 public class Main {
     public static void main(String[] args) {
         DAO studentDao = new StudentDaoImpl(FactoryDAO.getInstance("javabase.jdbc"));
-        Student student = studentDao.getById(3);
+        Student student = studentDao.getById(6);
         System.out.println(student);
 
         student.setName("Mikhail");
         student.setFamilyName("Doe");
         studentDao.update(student);
 
-        student = studentDao.getById(3);
+        student = studentDao.getById(6);
         System.out.println(student);
 
 //        studentDao.deleteStudentById(12);
