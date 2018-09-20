@@ -18,15 +18,22 @@ public abstract class DAO<T> {
 
     public abstract boolean deleteById(int id);
 
+    /**
+     * Map the current row of the given ResultSet to an Object.
+     * @param resultSet The ResultSet of which the current row is to be mapped to an Object.
+     * @return The mapped Object from the current row of the given ResultSet.
+     * @throws SQLException If something fails at database level.
+     */
     protected abstract T map(ResultSet resultSet) throws SQLException;
 
     /**
      * Method can be used with any sql SELECT query.
      * just pass required sql and give expected params
      *
-     * @param sql query
-     * @param values query params
-     * @return Student
+     * @param connectionManager connection instance
+     * @param sql SELECT query
+     * @param values PreparedStatement query params
+     * @return T
      */
     protected T find(FactoryDAO connectionManager, String sql, Object... values) {
         T obj = null;
