@@ -1,7 +1,5 @@
 package com.github.artemzi.hw15.realExample.dao;
 
-import com.github.artemzi.hw15.realExample.connectionManager.ConnectionManager;
-import com.github.artemzi.hw15.realExample.connectionManager.ConnectionManagerJdbcImpl;
 import com.github.artemzi.hw15.realExample.pojo.Student;
 
 import java.sql.Connection;
@@ -10,13 +8,18 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class StudentDaoImpl implements StudentDao {
-    private static ConnectionManager connectionManager = ConnectionManagerJdbcImpl.getInstance();
+    private FactoryDAO connectionManager;
+
+    public StudentDaoImpl(FactoryDAO factory) {
+        this.connectionManager = factory;
+    }
 
     @Override
     public boolean addStudent(Student student) {
-        Connection connection = connectionManager.getConnection();
-        try (PreparedStatement statement = connection.prepareStatement(
-                "INSERT INTO students VALUES (DEFAULT, ?, ?, ?, ?, ?)");
+
+        try (Connection connection = connectionManager.getConnection();
+            PreparedStatement statement = connection.prepareStatement(
+            "INSERT INTO students VALUES (DEFAULT, ?, ?, ?, ?, ?)");
         ) {
             statement.setString(1, student.getName());
             statement.setString(2, student.getFamilyName());
@@ -33,10 +36,10 @@ public class StudentDaoImpl implements StudentDao {
 
     @Override
     public Student getStudentById(int id) {
-        Connection connection = connectionManager.getConnection();
         Student student = null;
-        try (PreparedStatement statement = connection.prepareStatement(
-                "SELECT * from students WHERE id = ?");
+        try (Connection connection = connectionManager.getConnection();
+            PreparedStatement statement = connection.prepareStatement(
+            "SELECT * from students WHERE id = ?");
         ) {
             statement.setInt(1, id);
             try (ResultSet resultSet = statement.executeQuery()) {
@@ -59,9 +62,9 @@ public class StudentDaoImpl implements StudentDao {
     @Override
     public boolean update(Student student) {
         if (student.getId() != 0) {
-            Connection connection = connectionManager.getConnection();
-            try (PreparedStatement statement = connection.prepareStatement(
-                    "UPDATE students SET name=?, family_name=?, age=?, contact=?, city=? WHERE id=?");
+            try (Connection connection = connectionManager.getConnection();
+                PreparedStatement statement = connection.prepareStatement(
+                "UPDATE students SET name=?, family_name=?, age=?, contact=?, city=? WHERE id=?");
             ) {
                 statement.setString(1, student.getName());
                 statement.setString(2, student.getFamilyName());
@@ -82,9 +85,9 @@ public class StudentDaoImpl implements StudentDao {
 
     @Override
     public boolean deleteStudentById(int id) {
-        Connection connection = connectionManager.getConnection();
-        try (PreparedStatement statement = connection.prepareStatement(
-                "DELETE FROM students WHERE id=?");
+        try (Connection connection = connectionManager.getConnection();
+            PreparedStatement statement = connection.prepareStatement(
+            "DELETE FROM students WHERE id=?");
         ) {
             statement.setInt(1, id);
             statement.execute();
@@ -97,9 +100,9 @@ public class StudentDaoImpl implements StudentDao {
 
     @Override
     public boolean deleteStudentByName(Student student) {
-        Connection connection = connectionManager.getConnection();
-        try (PreparedStatement statement = connection.prepareStatement(
-                "DELETE FROM students WHERE name=?");
+        try (Connection connection = connectionManager.getConnection();
+            PreparedStatement statement = connection.prepareStatement(
+            "DELETE FROM students WHERE name=?");
         ) {
             statement.setString(1, student.getName());
             statement.execute();

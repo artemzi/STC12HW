@@ -3,3 +3,6 @@ out/*
 
 # ignore big files
 data/lab01/*
+
+# env files
+hw15.properties
