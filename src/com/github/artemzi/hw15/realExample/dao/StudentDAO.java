@@ -11,14 +11,14 @@ import java.sql.SQLException;
 
 import static com.github.artemzi.hw15.realExample.services.UtilsDAO.prepareStatement;
 
-public class StudentDaoImpl implements DAO {
+public class StudentDAO extends DAO<Student> {
     private FactoryDAO connectionManager;
     private static final String SQL_FIND_BY_ID = "SELECT * from students WHERE id = ?"; // never do stupid select with * (star) in code...
     private static final String SQL_INSERT = "INSERT INTO students VALUES (DEFAULT, ?, ?, ?, ?, ?)";
     private static final String SQL_UPDATE = "UPDATE students SET name=?, family_name=?, age=?, contact=?, city_id=? WHERE id=?";
     private static final String SQL_DELETE = "DELETE FROM students WHERE id=?";
 
-    public StudentDaoImpl(FactoryDAO factory) {
+    public StudentDAO(FactoryDAO factory) {
         this.connectionManager = factory;
     }
 
@@ -54,29 +54,7 @@ public class StudentDaoImpl implements DAO {
 
     @Override
     public Student getById(int id) {
-        return find(SQL_FIND_BY_ID, id);
-    }
-
-    /**
-     * Method can be used with any sql SELECT query.
-     * just pass required sql and give expected params
-     *
-     * @param sql query
-     * @param values query params
-     * @return Student
-     */
-    private Student find(String sql, Object... values) {
-        Student student = null;
-        try (Connection connection = connectionManager.getConnection();
-            PreparedStatement statement = prepareStatement(connection, sql, false, values);
-            ResultSet resultSet = statement.executeQuery()) {
-            if (resultSet.next()) {
-                student = map(resultSet);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return student;
+        return find(connectionManager, SQL_FIND_BY_ID, id);
     }
 
     @Override
@@ -119,7 +97,8 @@ public class StudentDaoImpl implements DAO {
         return true;
     }
 
-    private static Student map(ResultSet resultSet) throws SQLException {
+    @Override
+    protected Student map(ResultSet resultSet) throws SQLException {
         return new Student(
                 resultSet.getInt("id"),
                 resultSet.getString("name"),
