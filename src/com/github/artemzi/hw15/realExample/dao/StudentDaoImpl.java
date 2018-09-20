@@ -15,6 +15,7 @@ public class StudentDaoImpl implements DAO {
     private FactoryDAO connectionManager;
     private static final String SQL_FIND_BY_ID = "SELECT * from students WHERE id = ?"; // never do stupid select with * (star) in code...
     private static final String SQL_INSERT = "INSERT INTO students VALUES (DEFAULT, ?, ?, ?, ?, ?)";
+    private static final String SQL_UPDATE = "UPDATE students SET name=?, family_name=?, age=?, contact=?, city_id=? WHERE id=?";
 
     public StudentDaoImpl(FactoryDAO factory) {
         this.connectionManager = factory;
@@ -79,26 +80,26 @@ public class StudentDaoImpl implements DAO {
 
     @Override
     public boolean update(Student student) {
-        if (student.getId() != 0) {
-            try (Connection connection = connectionManager.getConnection();
-                PreparedStatement statement = connection.prepareStatement(
-                "UPDATE students SET name=?, family_name=?, age=?, contact=?, city_id=? WHERE id=?");
-            ) {
-                statement.setString(1, student.getName());
-                statement.setString(2, student.getFamilyName());
-                statement.setInt(3, student.getAge());
-                statement.setString(4, student.getContact());
-                statement.setInt(5, student.getCity_id());
-                statement.setInt(6, student.getId());
-                statement.execute();
-            } catch (SQLException e) {
-                e.printStackTrace();
-                return false;
+        Object[] values = {
+            student.getName(),
+            student.getFamilyName(),
+            student.getAge(),
+            student.getContact(),
+            student.getCity_id(),
+            student.getId()
+        };
+
+        try (Connection connection = connectionManager.getConnection();
+            PreparedStatement statement = prepareStatement(connection, SQL_UPDATE, false, values)) {
+            int affectedRows = statement.executeUpdate();
+            if (affectedRows == 0) {
+                throw new DAOException("Updating student failed, no rows affected.");
             }
-            return true;
-        } else {
-            return false;
+
+        } catch (SQLException e) {
+            throw new DAOException(e);
         }
+        return true;
     }
 
     @Override
