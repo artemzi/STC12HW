@@ -8,7 +8,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class StudentDaoImpl implements StudentDao {
+public class StudentDaoImpl implements DAO {
     private FactoryDAO connectionManager;
 
     public StudentDaoImpl(FactoryDAO factory) {
@@ -16,7 +16,7 @@ public class StudentDaoImpl implements StudentDao {
     }
 
     @Override
-    public boolean addStudent(Student student) {
+    public boolean add(Student student) {
 
         try (Connection connection = connectionManager.getConnection();
             PreparedStatement statement = connection.prepareStatement(
@@ -36,7 +36,7 @@ public class StudentDaoImpl implements StudentDao {
     }
 
     @Override
-    public Student getStudentById(int id) {
+    public Student getById(int id) {
         Student student = null;
         try (Connection connection = connectionManager.getConnection();
             PreparedStatement statement = connection.prepareStatement(
@@ -85,7 +85,7 @@ public class StudentDaoImpl implements StudentDao {
     }
 
     @Override
-    public boolean deleteStudentById(int id) {
+    public boolean deleteById(int id) {
         try (Connection connection = connectionManager.getConnection();
             PreparedStatement statement = connection.prepareStatement(
             "DELETE FROM students WHERE id=?");
@@ -100,7 +100,7 @@ public class StudentDaoImpl implements StudentDao {
     }
 
     @Override
-    public boolean deleteStudentByName(Student student) {
+    public boolean deleteByName(Student student) {
         try (Connection connection = connectionManager.getConnection();
             PreparedStatement statement = connection.prepareStatement(
             "DELETE FROM students WHERE name=?");
