@@ -22,9 +22,9 @@ public class ConnectionManagerJdbcImpl implements ConnectionManager {
         Connection connection = null;
         try {
             connection = DriverManager.getConnection(
-                    "jdbc:postgresql://localhost:5432/MobilePhones",
+                    "jdbc:postgresql://localhost:5432/postgres",
                     "postgres",
-                    "sa");
+                    "secret");
         } catch (SQLException e) {
             e.printStackTrace();
         }

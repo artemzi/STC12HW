@@ -46,7 +46,7 @@ public class StudentDaoImpl implements StudentDao {
                             resultSet.getString("family_name"),
                             resultSet.getInt("age"),
                             resultSet.getString("contact"),
-                            resultSet.getInt("city"));
+                            resultSet.getInt("city_id"));
                 }
             }
         } catch (SQLException e) {
