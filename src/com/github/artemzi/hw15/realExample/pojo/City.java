@@ -1,6 +1,9 @@
 package com.github.artemzi.hw15.realExample.pojo;
 
-public class City {
+import java.io.Serializable;
+import java.util.Objects;
+
+public class City implements Serializable {
     private int id;
     private String name;
     private int citizens;
@@ -33,6 +36,21 @@ public class City {
 
     public void setCitizens(int citizens) {
         this.citizens = citizens;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        City city = (City) o;
+        return id == city.id &&
+                citizens == city.citizens &&
+                Objects.equals(name, city.name);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, citizens);
     }
 
     @Override
