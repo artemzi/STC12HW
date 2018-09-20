@@ -23,17 +23,20 @@ public class Main {
 
         student = studentDao.getById(6);
         System.out.println(student);
+        System.out.println(student.getCityObject()); // get connected city
 
-        // ========
+        System.out.println("========");
+
         CityDAO cityDAO = new CityDAO(FactoryDAO.getInstance("javabase.jdbc"));
         City city = cityDAO.getById(1);
         System.out.println(city);
 
-        city.setName("Abrva");
-        city.setCitizens(1000000000);
-        cityDAO.update(city);
-
-        city = cityDAO.getById(1);
-        System.out.println(city);
+        System.out.println(city.getStudentsListInCurrentCity()); // get all connected students
+//        city.setName("Abrva");
+//        city.setCitizens(1000000000);
+//        cityDAO.update(city);
+//
+//        city = cityDAO.getById(1);
+//        System.out.println(city);
     }
 }

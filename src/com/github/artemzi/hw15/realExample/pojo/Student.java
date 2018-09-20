@@ -1,5 +1,8 @@
 package com.github.artemzi.hw15.realExample.pojo;
 
+import com.github.artemzi.hw15.realExample.dao.CityDAO;
+import com.github.artemzi.hw15.realExample.services.FactoryDAO;
+
 import java.io.Serializable;
 import java.util.Objects;
 
@@ -18,6 +21,16 @@ public class Student implements Serializable {
         this.age = age;
         this.contact = contact;
         this.city_id = city;
+    }
+
+    /**
+     * Return city object connected with current student
+     *
+     * @return City
+     */
+    public City getCityObject() {
+        CityDAO cityDAO = new CityDAO(FactoryDAO.getInstance("javabase.jdbc"));
+        return cityDAO.getById(this.city_id);
     }
 
     public int getId() {
