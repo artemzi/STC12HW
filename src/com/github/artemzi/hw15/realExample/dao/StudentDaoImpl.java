@@ -1,8 +1,8 @@
 package com.github.artemzi.hw15.realExample.dao;
 
-import ru.innopolis.stc12.jdbc.realExample.connectionManager.ConnectionManager;
-import ru.innopolis.stc12.jdbc.realExample.connectionManager.ConnectionManagerJdbcImpl;
-import ru.innopolis.stc12.jdbc.realExample.pojo.Student;
+import com.github.artemzi.hw15.realExample.connectionManager.ConnectionManager;
+import com.github.artemzi.hw15.realExample.connectionManager.ConnectionManagerJdbcImpl;
+import com.github.artemzi.hw15.realExample.pojo.Student;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

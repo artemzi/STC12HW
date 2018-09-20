@@ -1,7 +1,7 @@
 package com.github.artemzi.hw15.realExample;
 
-import ru.innopolis.stc12.jdbc.realExample.dao.StudentDao;
-import ru.innopolis.stc12.jdbc.realExample.dao.StudentDaoImpl;
+import com.github.artemzi.hw15.realExample.dao.StudentDao;
+import com.github.artemzi.hw15.realExample.dao.StudentDaoImpl;
 
 public class Main {
     public static void main(String[] args) {

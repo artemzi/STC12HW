@@ -1,6 +1,6 @@
 package com.github.artemzi.hw15.realExample.dao;
 
-import ru.innopolis.stc12.jdbc.realExample.pojo.Student;
+import com.github.artemzi.hw15.realExample.pojo.Student;
 
 public interface StudentDao {
     public boolean addStudent(Student student);
