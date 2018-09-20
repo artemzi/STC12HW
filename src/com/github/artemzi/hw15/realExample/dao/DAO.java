@@ -10,6 +10,4 @@ public interface DAO {
     public boolean update(Student student);
 
     public boolean deleteById(int id);
-
-    public boolean deleteByName(Student student);
 }

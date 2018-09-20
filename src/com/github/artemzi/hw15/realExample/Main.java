@@ -22,6 +22,6 @@ public class Main {
         student = studentDao.getById(6);
         System.out.println(student);
 
-//        studentDao.deleteStudentById(12);
+//        studentDao.deleteById(4);
     }
 }

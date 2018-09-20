@@ -16,6 +16,7 @@ public class StudentDaoImpl implements DAO {
     private static final String SQL_FIND_BY_ID = "SELECT * from students WHERE id = ?"; // never do stupid select with * (star) in code...
     private static final String SQL_INSERT = "INSERT INTO students VALUES (DEFAULT, ?, ?, ?, ?, ?)";
     private static final String SQL_UPDATE = "UPDATE students SET name=?, family_name=?, age=?, contact=?, city_id=? WHERE id=?";
+    private static final String SQL_DELETE = "DELETE FROM students WHERE id=?";
 
     public StudentDaoImpl(FactoryDAO factory) {
         this.connectionManager = factory;
@@ -104,30 +105,16 @@ public class StudentDaoImpl implements DAO {
 
     @Override
     public boolean deleteById(int id) {
-        try (Connection connection = connectionManager.getConnection();
-            PreparedStatement statement = connection.prepareStatement(
-            "DELETE FROM students WHERE id=?");
+        try (
+            Connection connection = connectionManager.getConnection();
+            PreparedStatement statement = prepareStatement(connection, SQL_DELETE, false, id);
         ) {
-            statement.setInt(1, id);
-            statement.execute();
+            int affectedRows = statement.executeUpdate();
+            if (affectedRows == 0) {
+                throw new DAOException("Deleting student failed, no rows affected.");
+            }
         } catch (SQLException e) {
-            e.printStackTrace();
-            return false;
-        }
-        return true;
-    }
-
-    @Override
-    public boolean deleteByName(Student student) {
-        try (Connection connection = connectionManager.getConnection();
-            PreparedStatement statement = connection.prepareStatement(
-            "DELETE FROM students WHERE name=?");
-        ) {
-            statement.setString(1, student.getName());
-            statement.execute();
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return false;
+            throw new DAOException(e);
         }
         return true;
     }
