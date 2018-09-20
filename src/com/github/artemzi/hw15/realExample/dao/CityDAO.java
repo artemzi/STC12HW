@@ -51,21 +51,52 @@ public class CityDAO extends DAO<City> {
 
     @Override
     public City getById(int id) {
-        return null;
+        return find(connectionManager, SQL_FIND_BY_ID, id);
     }
 
     @Override
-    public boolean update(City student) {
-        return false;
+    public boolean update(City city) {
+        Object[] values = {
+            city.getName(),
+            city.getCitizens(),
+            city.getId()
+        };
+
+        try (Connection connection = connectionManager.getConnection();
+            PreparedStatement statement = prepareStatement(connection, SQL_UPDATE, false, values)) {
+            int affectedRows = statement.executeUpdate();
+            if (affectedRows == 0) {
+                throw new DAOException("Updating city failed, no rows affected.");
+            }
+
+        } catch (SQLException e) {
+            throw new DAOException(e);
+        }
+        return true;
     }
 
     @Override
     public boolean deleteById(int id) {
-        return false;
+        try (
+            Connection connection = connectionManager.getConnection();
+            PreparedStatement statement = prepareStatement(connection, SQL_DELETE, false, id);
+        ) {
+            int affectedRows = statement.executeUpdate();
+            if (affectedRows == 0) {
+                throw new DAOException("Deleting city failed, no rows affected.");
+            }
+        } catch (SQLException e) {
+            throw new DAOException(e);
+        }
+        return true;
     }
 
     @Override
     protected City map(ResultSet resultSet) throws SQLException {
-        return null;
+        return new City(
+                resultSet.getInt("id"),
+                resultSet.getString("name"),
+                resultSet.getInt("citizens")
+        );
     }
 }
