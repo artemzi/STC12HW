@@ -83,7 +83,6 @@ public class StudentDaoImpl implements StudentDao {
     @Override
     public boolean deleteStudentById(int id) {
         Connection connection = connectionManager.getConnection();
-        Student student = null;
         try (PreparedStatement statement = connection.prepareStatement(
                 "DELETE FROM students WHERE id=?");
         ) {
@@ -98,6 +97,16 @@ public class StudentDaoImpl implements StudentDao {
 
     @Override
     public boolean deleteStudentByName(Student student) {
-        return false;
+        Connection connection = connectionManager.getConnection();
+        try (PreparedStatement statement = connection.prepareStatement(
+                "DELETE FROM students WHERE name=?");
+        ) {
+            statement.setString(1, student.getName());
+            statement.execute();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+        return true;
     }
 }
