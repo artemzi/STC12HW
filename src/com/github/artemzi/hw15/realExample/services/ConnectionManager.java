@@ -1,4 +1,4 @@
-package com.github.artemzi.hw15.realExample.connectionManager;
+package com.github.artemzi.hw15.realExample.services;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

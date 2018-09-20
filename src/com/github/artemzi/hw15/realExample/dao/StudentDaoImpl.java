@@ -1,6 +1,6 @@
 package com.github.artemzi.hw15.realExample.dao;
 
-import com.github.artemzi.hw15.realExample.connectionManager.FactoryDAO;
+import com.github.artemzi.hw15.realExample.services.FactoryDAO;
 import com.github.artemzi.hw15.realExample.exeptions.DAOException;
 import com.github.artemzi.hw15.realExample.pojo.Student;
 
@@ -9,7 +9,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import static com.github.artemzi.hw15.realExample.connectionManager.UtilsDAO.prepareStatement;
+import static com.github.artemzi.hw15.realExample.services.UtilsDAO.prepareStatement;
 
 public class StudentDaoImpl implements DAO {
     private FactoryDAO connectionManager;
@@ -58,7 +58,7 @@ public class StudentDaoImpl implements DAO {
     }
 
     /**
-     * Method can be used with any sql query.
+     * Method can be used with any sql SELECT query.
      * just pass required sql and give expected params
      *
      * @param sql query

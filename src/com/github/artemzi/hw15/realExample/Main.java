@@ -1,6 +1,6 @@
 package com.github.artemzi.hw15.realExample;
 
-import com.github.artemzi.hw15.realExample.connectionManager.FactoryDAO;
+import com.github.artemzi.hw15.realExample.services.FactoryDAO;
 import com.github.artemzi.hw15.realExample.dao.DAO;
 import com.github.artemzi.hw15.realExample.dao.StudentDaoImpl;
 import com.github.artemzi.hw15.realExample.pojo.Student;
