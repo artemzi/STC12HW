@@ -1,6 +1,10 @@
 package com.github.artemzi.hw15.realExample.pojo;
 
+import com.github.artemzi.hw15.realExample.dao.StudentDAO;
+import com.github.artemzi.hw15.realExample.services.FactoryDAO;
+
 import java.io.Serializable;
+import java.util.List;
 import java.util.Objects;
 
 public class City implements Serializable {
@@ -12,6 +16,12 @@ public class City implements Serializable {
         this.id = id;
         this.name = name;
         this.citizens = citizens;
+    }
+
+    public List<Student> getStudentsListInCurrentCity() {
+        StudentDAO studentDao = new StudentDAO(FactoryDAO.getInstance("javabase.jdbc"));
+
+        return studentDao.listByCity(this.id);
     }
 
     public int getId() {

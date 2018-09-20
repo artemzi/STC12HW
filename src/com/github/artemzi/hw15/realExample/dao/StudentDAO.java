@@ -8,12 +8,15 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import static com.github.artemzi.hw15.realExample.services.UtilsDAO.prepareStatement;
 
 public class StudentDAO extends DAO<Student> {
     private FactoryDAO connectionManager;
     private static final String SQL_FIND_BY_ID = "SELECT * from students WHERE id = ?"; // never do stupid select with * (star) in code...
+    private static final String SQL_FIND_BY_CITY_ID = "SELECT * from students WHERE city_id = ?"; // never do stupid select with * (star) in code...
     private static final String SQL_INSERT = "INSERT INTO students VALUES (DEFAULT, ?, ?, ?, ?, ?)";
     private static final String SQL_UPDATE = "UPDATE students SET name=?, family_name=?, age=?, contact=?, city_id=? WHERE id=?";
     private static final String SQL_DELETE = "DELETE FROM students WHERE id=?";
@@ -55,6 +58,23 @@ public class StudentDAO extends DAO<Student> {
     @Override
     public Student getById(int id) {
         return find(connectionManager, SQL_FIND_BY_ID, id);
+    }
+
+    public List<Student> listByCity(int id) {
+        List<Student> students = new ArrayList<>();
+
+        try (
+            Connection connection = connectionManager.getConnection();
+            PreparedStatement statement = prepareStatement(connection, SQL_FIND_BY_CITY_ID, false, id);
+            ResultSet resultSet = statement.executeQuery();
+        ) {
+            while (resultSet.next()) {
+                students.add(map(resultSet));
+            }
+        } catch (SQLException e) {
+            throw new DAOException(e);
+        }
+        return students;
     }
 
     @Override
