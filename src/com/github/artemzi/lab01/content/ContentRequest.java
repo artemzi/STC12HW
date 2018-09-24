@@ -1,5 +1,7 @@
 package com.github.artemzi.lab01.content;
 
+import org.apache.log4j.Logger;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -7,7 +9,6 @@ import java.io.InputStreamReader;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.concurrent.BlockingQueue;
-import java.util.logging.Logger;
 
 public class ContentRequest implements Runnable {
     private String path;
@@ -40,7 +41,7 @@ public class ContentRequest implements Runnable {
                     }
                 }
             } catch (IOException | InterruptedException e) {
-                LOGGER.warning(e.getMessage());
+                LOGGER.error(e.getMessage());
             }
         }
     }
@@ -60,7 +61,7 @@ public class ContentRequest implements Runnable {
             url = new URL(this.path);
             LOGGER.info("URL created: " + url.toString());
         } catch (MalformedURLException e) {
-            LOGGER.warning(e.getMessage());
+            LOGGER.error(e.getMessage());
         }
         return url;
     }

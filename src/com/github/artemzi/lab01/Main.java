@@ -1,13 +1,12 @@
 package com.github.artemzi.lab01;
 
 import com.github.artemzi.lab01.main.Occurrences;
+import org.apache.log4j.Logger;
 
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
-import java.util.logging.Logger;
 
 public class Main {
     private static final long START_TIME = System.nanoTime();
@@ -24,13 +23,15 @@ public class Main {
                 results.add("file:data/lab01/testSet/" + listOfFile.getName());
             }
         }
+        LOGGER.info("file paths was created");
         return results.toArray(new String[0]);
     }
 
     public static void main(String[] args) {
+        LOGGER.info("App started.");
         Occurrences o = new Occurrences();
-        Scanner in = new Scanner(System.in);
-        in.nextLine();
+//        Scanner in = new Scanner(System.in);
+//        in.nextLine(); // wait for profiler
 
         try {
             o.getOccurrences(
@@ -41,7 +42,7 @@ public class Main {
                     "RESULT"
             );
         } catch (InterruptedException e) {
-            LOGGER.info("[getOccurrences] was terminated.");
+            LOGGER.error("[getOccurrences] was terminated.");
         }
 
         long timeElapsed = TimeUnit.NANOSECONDS.toSeconds(System.nanoTime() - START_TIME) + 1;
