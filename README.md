@@ -1,9 +1,3 @@
-### lab01
-==========
-For now done
+### latest task was hw17-testing
 
-![screenshot](data/screenshots/lab01.png "lab01")
-
-todo: 
-1. check if url available && find what to do in this case
-2. ... and more; code is not ready for production.
+![hw17-testing](hw17.png "Test coverage from idea")
