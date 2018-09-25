@@ -1,12 +1,12 @@
 package com.github.artemzi.lab01.main;
 
 import com.github.artemzi.lab01.content.ContentRequest;
+import org.apache.log4j.Logger;
 
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.concurrent.*;
-import java.util.logging.Logger;
 
 public class Occurrences implements OccurrencesContact {
     private static final String FILE_PATH = "data/lab01/";
@@ -27,12 +27,14 @@ public class Occurrences implements OccurrencesContact {
                     writer.println(queue.take()); // take() will wait for content in queue if it not already exists
                 }
             } catch (IOException | InterruptedException e) {
-                LOGGER.warning(e.getMessage());
+                LOGGER.error(e.getMessage());
             }
         });
         fileWriter.start();
+        LOGGER.info("fileWriter was started");
         for (String source : sources) {
             pool.execute(new ContentRequest(source, words, queue));
+            LOGGER.info("Job executed for source: " + source);
         }
         pool.shutdown();
         pool.awaitTermination(Long.MAX_VALUE, TimeUnit.NANOSECONDS);
