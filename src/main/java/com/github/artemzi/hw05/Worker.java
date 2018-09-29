@@ -1,7 +1,5 @@
 package com.github.artemzi.hw05;
 
-import com.sun.corba.se.spi.orbutil.threadpool.Work;
-
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
