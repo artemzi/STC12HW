@@ -1,1 +1,1 @@
-add travis-ci support
+[![Build Status](https://travis-ci.org/artemzi/STC12HW.svg?branch=master)](https://travis-ci.org/artemzi/STC12HW)
