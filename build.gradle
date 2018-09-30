@@ -15,11 +15,17 @@ dependencies {
     compile group: 'log4j', name: 'log4j', version:'1.2.17'
     compile group: 'org.beanshell', name: 'bsh', version: '2.0b4'
     compile group: 'org.postgresql', name: 'postgresql', version: '42.2.5'
-    testCompile group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: '5.3.1'
+
+	testCompile('org.junit.jupiter:junit-jupiter-api:5.3.1')
+	testCompile('org.junit.jupiter:junit-jupiter-params:5.3.1')
+	testRuntime('org.junit.jupiter:junit-jupiter-engine:5.3.1')
 }
 
 test{
     useJUnitPlatform()
+    testLogging {
+		events "passed", "skipped", "failed"
+	}
     afterSuite { desc, result ->
         if (!desc.parent)
             println("${result.resultType} " +
@@ -28,4 +34,8 @@ test{
                     "${result.failedTestCount} failures, " +
                     "${result.skippedTestCount} skipped) ")
     }
+}
+
+wrapper {
+	gradleVersion = '4.10.2'
 }
