@@ -2,7 +2,8 @@
 out/*
 
 # ignore big files
-data/lab01/*
+data/lab01/testSet
+data/lab01/RESULT
 
 # env files
 hw15.properties
