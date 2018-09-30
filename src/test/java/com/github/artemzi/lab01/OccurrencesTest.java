@@ -29,11 +29,6 @@ class OccurrencesTest {
     @Test void resultFileCanBeCreated() {
         getResult();
         File result =  new File(RESULT_FILE_WITH_PATH);
-        try { // Make pause for travis-ci
-            Thread.sleep(5000);
-        } catch (InterruptedException e) {
-            LOGGER.warning(e.getMessage());
-        }
         Assertions.assertTrue(result.isFile());
     }
 
